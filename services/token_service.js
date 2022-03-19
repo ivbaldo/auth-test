@@ -8,18 +8,29 @@ const EXP_TIME = require('../config').tokenExpTmp;
 
 //Crear token
 
-//Devuelve un token tipo jwt 
-//Formato JWT:
-//      HEADE.PLAYLOAD.VERIFIY_SIGNATURE
-//
-//Donde:
-//      HEADER (Objeto JSON con el al...)
-//          {
-//              alg: ...
-//     ...
-//      Verify_signatura = HMACSHA256(base64UrlEncode(header) + "." +base64UrlEncode(payload), SECRET)
-//          }
-
+/*Devuelve un token tipo jwt 
+Formato JWT:
+      HEADE.PLAYLOAD.VERIFIY_SIGNATURE
+Donde:
+      HEADER (Objeto JSON con el al...)
+        {
+              "alg": "HS256",
+              "typ": "JWT"          }
+        }
+        PAYLOAD
+        {
+            "sub": "1234567890",
+            "name": "John Doe",
+            "iat": 1516239022
+        }
+      Verify_signatura
+      {
+          HMACSHA256(
+        base64UrlEncode(header) + "." +
+        base64UrlEncode(payload),          
+        ) 
+      }
+*/
 function creaToken( user){
     const payload = {
         sub: user._id,
